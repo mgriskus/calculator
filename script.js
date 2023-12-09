@@ -48,6 +48,8 @@ function handleCalculator(buttonClicked) {
   if (buttonClicked == "AC") {
     partialReset();
     result = undefined;
+  } else if (buttonClicked == "DEL") {
+    display.textContent = display.textContent.substring(0, display.textContent.length - 1);
   } else if (
     (buttonClicked == "+" || buttonClicked == "-") &&
     !display.textContent
@@ -106,7 +108,14 @@ document.addEventListener("keydown", (e) => {
     case "*":
     case "/":
     case "=":
-    case "AC":
+      e.preventDefault();
       handleCalculator(e.key);
+      break;
+    case "Backspace":
+      handleCalculator("DEL");
+      break;
+    case "Delete":
+      handleCalculator("AC");
+      break;
   }
 })
