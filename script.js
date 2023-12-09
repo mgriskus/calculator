@@ -44,8 +44,7 @@ function partialReset() {
   display.textContent = "";
 }
 
-buttonContainer.addEventListener("mouseup", (e) => {
-  let buttonClicked = e.target.textContent;
+function handleCalculator(buttonClicked) {
   if (buttonClicked == "AC") {
     partialReset();
     result = undefined;
@@ -93,4 +92,21 @@ buttonContainer.addEventListener("mouseup", (e) => {
       display.textContent = "";
     }
   }
+}
+
+buttonContainer.addEventListener("mouseup", (e) => {
+  handleCalculator(e.target.textContent);
 });
+
+document.addEventListener("keydown", (e) => {
+  if ((+e.key >= 0 && +e.key <= 9)) handleCalculator(e.key);
+  switch(e.key) {
+    case "+":
+    case "-":
+    case "*":
+    case "/":
+    case "=":
+    case "AC":
+      handleCalculator(e.key);
+  }
+})
