@@ -1,13 +1,11 @@
 const display = document.querySelector(".display");
 const buttonContainer = document.querySelector(".button-container");
 
-let currentNum = "",
-  num1 = 0,
+let num1 = 0,
   operator = "+",
-  num2 = undefined,
-  result = undefined,
-  isPreviousNum = false;
-isPointInNum = false;
+  num2,
+  isPreviousNum = false,
+  isPointInNum = false;
 
 function add(num1, num2) {
   return num1 + num2;
@@ -46,12 +44,19 @@ function partialReset() {
   operator = "+";
   num2 = undefined;
   display.textContent = "";
-  result = undefined;
 }
 
 function handleCalculator(buttonClicked) {
-  if (buttonClicked == "AC") {
+  if (!isNaN(buttonClicked)) {
+    if (isPreviousNum) {
+      isPreviousNum = false;
+      display.textContent = "";
+    }
+    display.textContent += buttonClicked;
+  } else if (buttonClicked == "AC") {
     partialReset();
+  } else if (isNaN(display.textContent)) {
+    return;
   } else if (buttonClicked == "DEL" && !isNaN(display.textContent)) {
     display.textContent = display.textContent.substring(
       0,
@@ -67,22 +72,15 @@ function handleCalculator(buttonClicked) {
       display.textContent += ".";
       isPointInNum = true;
     }
-  } else if (!isNaN(buttonClicked)) {
-    if (isPreviousNum) {
-      isPreviousNum = false;
-      currentNum = "";
-    }
-    currentNum += buttonClicked;
-    display.textContent = currentNum;
   } else if (!isNaN(display.textContent)) {
     num2 = +display.textContent;
-    result = operate(num1, operator, num2);
+    let result = operate(num1, operator, num2);
     if (result != "Division by 0 is impossible") {
       result = Math.round(result * 100) / 100;
     } else {
       display.textContent = "Division by 0 is impossible";
     }
-    num1 = display.textContent = currentNum = result;
+    num1 = display.textContent = result;
     operator = buttonClicked;
     isPreviousNum = true;
   }
