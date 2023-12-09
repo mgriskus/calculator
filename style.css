@@ -1,0 +1,31 @@
+:root {
+  --calculator-height: 400px;
+  --calculator-width: calc(var(--calculator-height) * 1.25);
+  --button-width: calc(var(--calculator-width) / 3);
+  --button-height: calc(var(--calculator-height) / 5);
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: var(--calculator-width);
+  height: var(--calculator-height);
+}
+
+.button-container button {
+  width: var(--button-width);
+  height: var(--button-height);
+  border: none;
+  flex-grow: 1;
+}
+
+.display {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 32px;
+  width: var(--calculator-width);
+  height: var(--button-height);
+  background-color: black;
+  color: white;
+  overflow-x: scroll;
+}
