@@ -1,31 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
 :root {
-  --calculator-height: 400px;
-  --calculator-width: calc(var(--calculator-height) * 1.25);
-  --button-width: calc(var(--calculator-width) / 3);
-  --button-height: calc(var(--calculator-height) / 5);
+  --button-section-height: 400px;
+  --calculator-width: calc(var(--button-section-height) * 1.25);
+  --button-width: calc(var(--calculator-width) / 5);
+  --button-height: calc(var(--button-section-height) / 4);
+  --number-section-width: calc(var(--button-width) * 3);
+  --operator-section-width: calc(var(--button-width) * 2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #90708C;
+}
+
+.calculator {
+  box-sizing: content-box;
+  padding: 16px;
+  background-color: #152128;
+  width: var(--calculator-width);
+  height: var(--calculator-height);
+  margin: 0 auto;
 }
 
 .button-container {
   display: flex;
   flex-wrap: wrap;
-  width: var(--calculator-width);
-  height: var(--calculator-height);
+}
+
+button {
+  border: none;
 }
 
 .button-container button {
   width: var(--button-width);
   height: var(--button-height);
-  border: none;
   flex-grow: 1;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.number-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  width: var(--number-section-width);
+}
+
+.operator-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  width: var(--operator-section-width);
+}
+
+.number-buttons button {
+  background-color: #DDE3E4;
+  border: 4px solid #BBC7C9;
+}
+
+.number-buttons button:hover {
+  background-color: #BBC7C9;
+}
+
+.operator-buttons .red-button {
+  background-color: #B0413E;
+  border: 4px solid #883330;
+}
+
+.operator-buttons .red-button:hover {
+  background-color: #883330;
+}
+
+.operator-buttons button {
+  color: white;
+  background-color: #336699;
+  border: 4px solid #24476B;
+}
+
+.operator-buttons button:hover {
+  background-color: #24476B;
 }
 
 .display {
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'Source Code Pro', monospace;
   font-weight: bold;
-  font-size: 32px;
+  font-size: 48px;
   width: var(--calculator-width);
   height: var(--button-height);
-  background-color: black;
+  padding: 4px;
+  background-color: #233743;
   color: white;
   overflow-x: scroll;
 }
