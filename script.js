@@ -5,7 +5,8 @@ let num1 = 0,
   operator = "+",
   num2,
   isPreviousNum = false,
-  isPointInNum = false;
+  isPointInNum = false,
+  isAnswer = false;
 
 function add(num1, num2) {
   return num1 + num2;
@@ -23,6 +24,10 @@ function divide(num1, num2) {
   return num1 / num2;
 }
 
+function power(num1, num2) {
+  return num1 ** num2;
+}
+
 function operate(num1, operator, num2) {
   switch (operator) {
     case "+":
@@ -34,6 +39,8 @@ function operate(num1, operator, num2) {
     case "/":
       if (num2 == 0) return "Division by 0 is impossible";
       return divide(num1, num2);
+    case "^":
+      return power(num1, num2);
     case "=":
       return num1;
   }
@@ -48,7 +55,10 @@ function partialReset() {
 
 function handleCalculator(buttonClicked) {
   if (!isNaN(buttonClicked)) {
-    if (isPreviousNum) {
+    if (isAnswer) {
+      isPreviousNum = isAnswer = false;
+      partialReset();
+    } else if (isPreviousNum) {
       isPreviousNum = false;
       display.textContent = "";
     }
@@ -83,6 +93,7 @@ function handleCalculator(buttonClicked) {
     num1 = display.textContent = result;
     operator = buttonClicked;
     isPreviousNum = true;
+    if (buttonClicked == "=") isAnswer = true;
   }
 }
 
@@ -97,6 +108,7 @@ document.addEventListener("keydown", (e) => {
     case "-":
     case "*":
     case "/":
+    case "^":
     case "=":
       e.preventDefault();
       handleCalculator(e.key);
